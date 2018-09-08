@@ -1,0 +1,42 @@
+
+### TRACEMALLOC RUN ###
+
+E:\Projects\Python3_projects\test_python\Sandbox\sandbox\sandbox\asyncio_x (master -> origin)
+(test_env) λ python asyncio_x.py
+[ Top 10 ]
+d:\programi\python\python35-32\Lib\asyncio\futures.py:152: size=47.7 MiB, count=1000002, average=50 B
+D:\PROGRAMI\Python\VirtualEnvironments\test_env\lib\_weakrefset.py:84: size=29.0 MiB, count=500005, average=61 B
+asyncio_x.py:36: size=25.0 MiB, count=500100, average=52 B
+d:\programi\python\python35-32\Lib\asyncio\futures.py:153: size=17.2 MiB, count=500001, average=36 B
+d:\programi\python\python35-32\Lib\asyncio\base_events.py:261: size=15.3 MiB, count=500002, average=32 B
+d:\programi\python\python35-32\Lib\asyncio\tasks.py:631: size=2095 KiB, count=3, average=698 KiB
+d:\programi\python\python35-32\Lib\asyncio\tasks.py:635: size=1953 KiB, count=2, average=977 KiB
+<frozen importlib._bootstrap_external>:476: size=1663 KiB, count=22882, average=74 B
+<frozen importlib._bootstrap>:222: size=295 KiB, count=4071, average=74 B
+D:\PROGRAMI\Python\VirtualEnvironments\test_env\lib\collections\__init__.py:428: size=155 KiB, count=3436, average=46 B
+Memory used: 698.09 MB (before coro_run exit)
+Memory used: 34.49 MB (before program exit)
+
+### PYMPLER RUN ###
+
+E:\Projects\Python3_projects\test_python\Sandbox\sandbox\sandbox\asyncio_x (master -> origin)
+(test_env) λ python asyncio_x.py
+                               types |   # objects |   total size
+==================================== | =========== | ============
+                        <class 'dict |      500450 |     47.84 MB
+                        <class 'list |      504243 |     23.38 MB
+                   <class 'coroutine |      500001 |     22.89 MB
+                     <class 'weakref |      500195 |     20.99 MB
+          <class 'asyncio.tasks.Task |      500001 |     15.26 MB
+                         <class 'set |          22 |      8.01 MB
+                         <class 'str |        7238 |    527.04 KB
+                        <class 'code |        1319 |    103.13 KB
+                        <class 'type |         176 |     86.78 KB
+                       <class 'tuple |         467 |     16.78 KB
+                         <class 'int |         518 |      7.56 KB
+                    <class 'property |         175 |      7.52 KB
+                 function (__init__) |          91 |      6.40 KB
+         <class 'operator.itemgetter |         145 |      4.53 KB
+  <class 'builtin_function_or_method |         115 |      4.49 KB
+Memory used: 438.19 MB (before coro_run exit)
+Memory used: 41.83 MB (before program exit)
