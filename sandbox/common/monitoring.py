@@ -1,5 +1,7 @@
 import time
 
+import psutil
+
 from sandbox.common.formatting import format_seconds
 
 def log_time(msg=None):
@@ -16,6 +18,12 @@ def log_time(msg=None):
 
     return decorator
 
+def show_mem_usage(psutil_proc=None):
+    if psutil_proc is None:
+        psutil_proc = psutil.Process()
+    
+    print('Memory used: %s MB' % 
+          round(psutil_proc.memory_info().rss / 1000000, 2))
 
 if __name__ == '__main__':
     @log_time()

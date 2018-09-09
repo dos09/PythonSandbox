@@ -54,11 +54,21 @@ def show_refs_from_module():
     import sys
     current_module = sys.modules[__name__]
     print(current_module)
-    func_that_will_leak()
+    #func_that_will_leak()
     objgraph.show_refs([current_module], 
                        filename='references-from-main.png',
                        too_many=100,
                        refcounts=True)
+    
+def show_most_common():
+    objgraph.show_most_common_types(limit=10)    
+
+def show_whats_new():
+    _ = objgraph.get_new_ids(limit=5) # store current objects in _state
+    _ = objgraph.get_new_ids(limit=5) # current_ids become old_ids in _state
+    a = [1,2,3]
+    r = objgraph.get_new_ids(limit=5)
+    
 
 def run():
     # show_references()
@@ -67,6 +77,8 @@ def run():
     # show_chain_of_leaked()
     # show_leaked_objects()
     show_refs_from_module()
+    # show_most_common()
+    # show_whats_new()
     
 
 if __name__ == '__main__':
@@ -80,4 +92,7 @@ https://graphviz.gitlab.io/_pages/Download/Download_windows.html
 Once installed add the bin folder to the Path variable
 2. pip install objgraph
 3. check the quickstart https://mg.pov.lt/objgraph/
+
+.dot file to png
+dot -Tpng input.dot -o output.png
 """
