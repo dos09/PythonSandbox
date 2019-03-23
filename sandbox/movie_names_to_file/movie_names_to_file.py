@@ -9,7 +9,7 @@ def parse_args():
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('dir')
     arg_parser.add_argument('--debug', action='store_true')
-    arg_parser.add_argument('--out-file', help=('''
+    arg_parser.add_argument('--out-file', required=True, help=('''
     File name where to write the movie names.
     If not abspath, it is considered to be in the directory with movies.
     If exists will only add the new names (if any).
