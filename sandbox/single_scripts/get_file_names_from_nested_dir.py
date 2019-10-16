@@ -30,6 +30,7 @@ def load_file_names(dir_name, file_names):
 def run():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dir-name', required=True)
+    parser.add_argument('--out-file', required=True)
     args = parser.parse_args()
     dir_name = args.dir_name
 
@@ -43,7 +44,13 @@ def run():
     file_names = set()
     load_file_names(dir_name, file_names)
     LOG.info('File names loaded: %s', len(file_names))
-    LOG.info('File names: %s', sorted(file_names))
+    with open(args.out_file, 'w') as fout:
+        for fname in sorted(file_names):
+            fout.write('%s\n' % fname)
+
+    LOG.info('Output file %s', os.path.abspath(args.out_file))
+
+    # LOG.info('File names: %s', sorted(file_names))
 
 
 if __name__ == '__main__':
