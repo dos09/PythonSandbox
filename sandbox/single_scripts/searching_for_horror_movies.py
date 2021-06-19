@@ -34,8 +34,9 @@ class MyHTMLParser(HTMLParser):
 
 def read_cli():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--file-name', required=True)
-    parser.add_argument('--movie-type', required=True,
+    parser.add_argument('--file-name', required=True,
+                        help='File with pasted webpage(s) source code')
+    parser.add_argument('--movie-type', default='Ужас',
                         help='Например: Ужас, Комедия...')
     args = parser.parse_args()
     if not os.path.isfile(args.file_name):
