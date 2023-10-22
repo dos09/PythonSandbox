@@ -26,6 +26,7 @@ def read_cli_args():
     parser.add_argument('--iphone-dcim-dir', required=True)
     parser.add_argument('--backed-up-files-dir', required=True)
     parser.add_argument('--new-files-dir', required=True)
+    parser.add_argument('--yes', action='store_true')
     return parser.parse_args()
 
     
@@ -114,6 +115,7 @@ def write_new_files(new_files_dir, new_file_names):
 
 def run():
     args = read_cli_args()
+    
     validate_cli_args(args)
     iphone_dcim_dir = args.iphone_dcim_dir
     backed_up_files_dir = args.backed_up_files_dir
@@ -141,8 +143,11 @@ def run():
 
     new_files_dir = args.new_files_dir
     new_files_dir = os.path.join(new_files_dir, 'new_files_%s' % datetime.now())
-    ans = input('Write new files? y/n (to "%s")\n' % new_files_dir)
-    if ans.lower().strip() == 'y':
+    yes = args.yes
+    if not yes:
+        ans = input('Write new files? y/n (to "%s")\n' % new_files_dir)
+        yes = ans.lower().strip() == 'y'
+    if yes:
         write_new_files(new_files_dir, new_file_names)
     else:
         print('Will skip copying new files')
