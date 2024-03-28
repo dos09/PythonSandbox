@@ -1,3 +1,17 @@
+"""
+1. open playlist
+2. scroll down to load all videos
+3. open firefox dev tools (ctrl+shift+k) or 
+    right click on last video from playlist and select inspect
+4. from the "Inspector" tab of the dev tools copy the HTML to local file:
+    scroll up
+    collapse <body> tag
+    right click on it 
+    copy
+    outer HTML
+5. Run script that will parse the HTML and will print the video titles
+"""
+
 from html.parser import HTMLParser
 
 FILE_NAME = '/home/zhulien/work/data/youtube/youtube_playlist'
