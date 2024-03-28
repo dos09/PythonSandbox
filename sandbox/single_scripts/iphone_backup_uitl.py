@@ -150,7 +150,7 @@ def run():
     if yes:
         write_new_files(new_files_dir, new_file_names)
     else:
-        print('Will skip copying new files')
+        print('Will skip copying new files:\n%s' % (new_file_names,))
 
 
 if __name__ == '__main__':
