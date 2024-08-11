@@ -22,11 +22,19 @@ from datetime import datetime
 
 def read_cli_args():
     print('Reading CLI args')
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--iphone-dcim-dir', required=True)
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument(
+        '--iphone-dcim-dir', required=True,
+        help=(
+            'Example: /run/user/1000/gvfs/gphoto2\:host\=Apple_Inc._iPhone_'
+            '16e1f710c0e67883b88e1dde42636e5e651b62c4/DCIM'
+        )
+    )
     parser.add_argument('--backed-up-files-dir', required=True)
     parser.add_argument('--new-files-dir', required=True)
-    parser.add_argument('--yes', action='store_true')
+    parser.add_argument('--ask-to-copy-files', action='store_true')
     return parser.parse_args()
 
     
@@ -114,7 +122,7 @@ def write_new_files(new_files_dir, new_file_names):
 
 
 def run():
-    args = read_cli_args()
+    args = read_cli_args()           
     
     validate_cli_args(args)
     iphone_dcim_dir = args.iphone_dcim_dir
@@ -143,10 +151,11 @@ def run():
 
     new_files_dir = args.new_files_dir
     new_files_dir = os.path.join(new_files_dir, 'new_files_%s' % datetime.now())
-    yes = args.yes
-    if not yes:
+    yes = True
+    if args.ask_to_copy_files:
         ans = input('Write new files? y/n (to "%s")\n' % new_files_dir)
         yes = ans.lower().strip() == 'y'
+    
     if yes:
         write_new_files(new_files_dir, new_file_names)
     else:
